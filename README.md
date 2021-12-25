@@ -1,5 +1,5 @@
 # colorschemez display
-This code takes the most recent tweet from the twitter account @colorschemez, and displays it onto a 2.4" TFT display. Editing must be done within the TJpg_Decoder liibrary to match the display hardware. Info for that is within the library's documentation, its pretty straightforward.
+This code takes the most recent tweet from the twitter account @colorschemez, and displays it onto a 2.4" TFT display. Editing must be done within the TJpg_Decoder liibrary to match the display hardware. Info for that is within the library's documentation, its pretty straightforward. Feel free to message me if you have any questions.
 
 Some parts of this code is used from Bodmer's examples (https://github.com/Bodmer/TJpg_Decoder). I marked what was used within the code. Slight edits were made as necessary to meet my goals.
 
