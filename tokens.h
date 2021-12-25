@@ -1,5 +1,5 @@
 const char* ssid = "ATT4rXYQXi"; // enter SSID
-const char* pass = "aywic5mrc?yr"; // enter password
+const char* pass = ""; // enter password
 
 #define CONSUMER_KEY        "UA4GaKchqiGNb41MMfIJaonHV" // aka api key
 #define CONSUMER_KEY_SECRET "NVrjystaqsoNvcsmJHboJXCaNClCpTH3pCOLJLvYdyCcmvaoMb"
