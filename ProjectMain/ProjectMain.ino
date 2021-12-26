@@ -113,6 +113,7 @@ void loop() {
     if (WiFi.status() != WL_CONNECTED) {
         // If WiFi gets disconnected, attempt to connect
         attemptConnection();
+        prevID = "";
     }
 
     // Image url from twitter, text from tweet, tweet ID for checking if new
@@ -182,22 +183,60 @@ void loop() {
 
 void attemptConnection() {
     Serial.print("Connecting to ");
-    Serial.println(ssid);
+    Serial.print(ssid);
     tft.print("Connecting to ");
     tft.println(ssid);
 
     WiFi.begin(ssid, pass);
+    int attempts = 0;
+    int network;
     while (WiFi.status() != WL_CONNECTED) {
-        delay(250);
-        digitalWrite(LEDPIN, HIGH);
-        Serial.print(".");
-        delay(250);
-        digitalWrite(LEDPIN, LOW);
+        // Add more versions of case 1 if you have more networks
+        // Switch is added because this device may travel between multiple
+        // networks.
+        switch (network) {
+            case 1:
+                delay(250);
+                digitalWrite(LEDPIN, HIGH);
+                Serial.print(".");
+                tft.print(".");
+                delay(250);
+                digitalWrite(LEDPIN, LOW);
+                attempts++;
+
+                if (attempts > 15) {
+                    attempts = 0;
+                    WiFi.begin(ssid2);
+                    network++;
+                    Serial.println();
+                    tft.println();
+                    Serial.println("Failed connection, trying library WiFi");
+                    tft.println("Failed connection, trying library WiFi");
+                    break;
+                }
+                break;
+            case 2:
+                delay(250);
+                digitalWrite(LEDPIN, HIGH);
+                Serial.print(".");
+                tft.print(".");
+                delay(250);
+                digitalWrite(LEDPIN, LOW);
+                attempts++;
+
+                if (attempts > 15) {
+                    tft.println();
+                    Serial.println("Failed connection, restarting");
+                    tft.println("Failed connection, restarting");
+                    return;
+                }
+        }
     }
     Serial.println("");
     Serial.println("Wifi connected");
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
+    tft.println();
     tft.println("Wifi connected");
     tft.println("IP address: ");
     tft.println(WiFi.localIP());
